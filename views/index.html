@@ -1,48 +1,106 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>URL Shortener</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-   <head>
-      <title>URL Shortener</title>
-      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <link href="/public/style.css" rel="stylesheet" type="text/css">
-   </head>
-
-   <body>
-      <div class="container">
-        <h2>API Project: URL Shortener Microservice</h2>
-        <h3>User Story: </h3>
+  <body>
+    <div class="background"></div>
+    <header>
+      <h2>API Project: URL Shortener Microservice</h2>
+    </header>
+    <div class="container">
+      <div id="stories">
+        <h3>User Story:</h3>
         <ol>
-          <li>I can POST a URL to <code>[project_url]/api/shorturl/new</code> and I will receive a shortened URL in the JSON response.<br>Example : <code>{"original_url":"www.google.com","short_url":1}</code></li>
-          <li>If I pass an invalid URL that doesn't follow the <code>http(s)://www.example.com(/more/routes)</code> format, the JSON response will contain an error like <code>{"error":"invalid URL"}</code><br>
-          HINT: to be sure that the submitted url points to a valid site you can use the function <code>dns.lookup(host, cb)</code> from the <code>dns</code> core module.</li>
-          <li>When I visit the shortened URL, it will redirect me to my original link.</li>
+          <li>
+            I can POST a URL to <code>[project_url]/api/shorturl/new</code> and
+            I will receive a shortened URL in the JSON response.<br />Example :
+            <code>{"original_url":"www.google.com","short_url":1}</code>
+          </li>
+          <li>
+            If I pass an invalid URL that doesn't follow the
+            <code>http(s)://www.example.com(/more/routes)</code> format, the
+            JSON response will contain an error like
+            <code>{"error":"invalid URL"}</code><br />
+            HINT: to be sure that the submitted url points to a valid site you
+            can use the function <code>dns.lookup(host, cb)</code> from the
+            <code>dns</code> core module.
+          </li>
+          <li>
+            When I visit the shortened URL, it will redirect me to my original
+            link.
+          </li>
         </ol>
-        
-        <h3>Short URL Creation </h3>
+      </div>
+
+      <div id="api">
+        <h3>Short URL Creation</h3>
         <p>
-          example: <code>POST [project_url]/api/shorturl/new</code> - <code>https://www.google.com</code>
+          example: <code>POST [project_url]/api/shorturl/new</code> -
+          <code>https://www.google.com</code>
         </p>
-        <form action="api/shorturl/new" method="POST">
+        <div class="inputs">
           <label for="url_input">URL to be shortened</label>
-          <input id="url_input" type="text" name="url" value="https://www.freecodecamp.com">
-          <input type="submit" value="POST URL">
-        </form>
-        <h3>Example Usage:</h3>
-        <a href="https://regular-sing.glitch.me/api/shorturl/3">
-          [this_project_url]/api/shorturl/3
-        </a>
+          <input
+            id="url_input"
+            type="text"
+            name="url"
+            value="https://www.freecodecamp.com"
+          />
+          <button id="submit" type="button">POST URL</button>
+        </div>
+        <div class="outputs">
+          <label for="url_output">Shortened URL</label>
+          <input id="url_output" type="text" name="url" value="" />
+          <div id="example">
+            <h3>Example Usage:</h3>
+            <a href="/api/shorturl/51961">
+              [this_project_url]/api/shorturl/51961
+            </a>
 
-        <h3>Will Redirect to:</h3>
-        <p>https://forum.freecodecamp.com</p>
+            <h3>Will Redirect to:</h3>
+            <p>https://forum.freecodecamp.com</p>
+          </div>
+        </div>
       </div>
-      <div class="footer">
-        <p>
-          by <a href="http://www.freecodecamp.com">freeCodeCamp</a>
-        </p>
-      </div>
-   </body>
-
-
+    </div>
+    <div class="footer">
+      <p>by <a href="http://reinis.herokuapp.com">Reinis</a></p>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const submitBtn = document.getElementById("submit");
+      let urlInput = document.getElementById("url_input").value;
+      let urlOutput = document.getElementById("url_output");
+      submitBtn.addEventListener("click", async () => {
+        $.post("/api/shorturl/", { url: urlInput }).then(function(res) {
+          let shortUrl = window.location.href + "api/shorturl/" + res.short_url;
+          urlOutput.classList.remove("newOutput");
+          urlOutput.classList.add("newOutput");
+          urlOutput.value = shortUrl;
+          return;
+        });
+      });
+    </script>
+  </body>
 </html>

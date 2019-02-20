@@ -1,17 +1,83 @@
-/****** Main Styling ******/
-
+html,
 body {
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	color: #222;
-	background-color: #FaFaFa;
-	text-align: center;
-	line-height: 1.4em;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  color: #222;
+  text-align: center;
+  line-height: 1.4em;
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+input,
+textarea {
+  width: 300px;
+  height: 30px;
+  font-size: 16px;
+}
+
+.background {
+  z-index: -500;
+
+  background-image: url("/public/background.jpg");
+  opacity: 0.2;
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .container {
-	padding: 0;
-	margin-top: 40px;
+  width: 70%;
+  margin: 1em auto;
+  margin-top: 40px;
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  background-image: linear-gradient(
+    0.25turn,
+    rgba(95, 158, 160, 0.726),
+    rgba(46, 46, 46, 0.726),
+    rgba(184, 135, 11, 0.726)
+  );
+  border-radius: 10px;
+  font-weight: bolder;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.container > div {
+  overflow: hidden;
+}
+
+#stories {
+  flex-basis: 40%;
+}
+
+#api {
+  flex-basis: 40%;
+}
+#api > div {
+  margin: 10px;
 }
 
 h3 {
@@ -19,56 +85,32 @@ h3 {
 }
 
 .footer {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
-.user-stories {
-  position: relative;
-  text-align: justify;
-  max-width: 700px;
-  margin: 15px auto;
-}
 code {
   font-family: monospace;
   padding: 2px;
   color: black;
   background-color: #fff;
 }
-ol {
-	list-style-position: inside;
-}
-ul {
-	list-style-type: none;
+
+button {
+  width: 150px;
+  height: 40px;
+  margin: 25px 10px;
+  box-shadow: 0 0 5px 5px forestgreen;
+  transition: transform 0.3s;
 }
 
-li {
-  margin-bottom: 0.5em;
-}
-.user-stories li {
-  margin-bottom: 1em;
+button:hover {
+  transform: scale(1.5);
 }
 
-a {
-	color: #2574A9;
+#url_output {
+  transition: transform 0.3s cubic-bezier(0, 1.95, 0.31, -1.27);
 }
 
-form {
-  border: solid 1px black;
-  border-radius: 5px;
-  margin: 10px auto;
-  padding: 20px;
-  max-width: 600px;
-}
-
-label {
-  margin-right: 10px;
-}
-
-input {
-  padding: 5px;
-}
-
-input[type=text] {
-  width: 220px;
-  text-align: center;
+.newOutput {
+  transform: scale(1.5);
 }

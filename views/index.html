@@ -68,6 +68,7 @@
         <div class="outputs">
           <label for="url_output">Shortened URL</label>
           <input id="url_output" type="text" name="url" value="" />
+          <a id="link" href=""></a>
           <div id="example">
             <h3>Example Usage:</h3>
             <a href="/api/shorturl/51961">
@@ -92,12 +93,15 @@
       const submitBtn = document.getElementById("submit");
       let urlInput = document.getElementById("url_input").value;
       let urlOutput = document.getElementById("url_output");
+      let link = document.getElementById("link");
       submitBtn.addEventListener("click", async () => {
         $.post("/api/shorturl/", { url: urlInput }).then(function(res) {
           let shortUrl = window.location.href + "api/shorturl/" + res.short_url;
           urlOutput.classList.remove("newOutput");
           urlOutput.classList.add("newOutput");
           urlOutput.value = shortUrl;
+          link.href = shortUrl;
+          link.textContent = shortUrl;
           return;
         });
       });

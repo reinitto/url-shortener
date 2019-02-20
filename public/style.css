@@ -81,11 +81,7 @@ textarea {
 }
 
 h3 {
-  margin-top: 30px;
-}
-
-.footer {
-  margin-top: 40px;
+  margin-top: 15px;
 }
 
 code {
@@ -107,11 +103,6 @@ button:hover {
   transform: scale(1.5);
 }
 
-#url_output {
-  transition: transform 0.3s cubic-bezier(0, 1.95, 0.31, -1.27);
-}
-
-.newOutput {
-  max-width: 500px;
-  transform: scale(1.5);
+#example {
+  font-size: 10px;
 }

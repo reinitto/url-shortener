@@ -112,5 +112,6 @@ button:hover {
 }
 
 .newOutput {
+  max-width: 500px;
   transform: scale(1.5);
 }
